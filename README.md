@@ -1,0 +1,3 @@
+# PhASCII
+
+Initial project README.
