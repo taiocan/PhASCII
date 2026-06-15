@@ -257,6 +257,88 @@ When a work order touches code or workflow files, CI should verify formatting, w
 Prefer minimal, least-privilege workflows.
 Keep the workflow aligned with the current branch and PR expectations.
 
+## Text hygiene
+
+Governance files must remain reviewable as plain text.
+
+AGENTS.md must be ASCII-only, LF-only, free of bidi Unicode control
+characters, and free of collapsed long structural lines.
+
+Before requesting strategic review for Markdown or governance changes, run:
+
+```bash
+python3 scripts/check_text_hygiene.py
+git diff --check
+```
+
+When GitHub UI warnings conflict with byte-level checks, use the exact PR head
+SHA and raw GitHub payload as the source of truth.
+
+For exact-head verification, use:
+
+```bash
+gh pr view <PR_NUMBER> --json headRefOid,url
+git fetch origin pull/<PR_NUMBER>/head:review/pr-<PR_NUMBER>
+git checkout review/pr-<PR_NUMBER>
+git rev-parse HEAD
+python3 scripts/check_text_hygiene.py
+```
+
+## Merge-state verification before new work
+
+A new implementation branch must start from updated `main`.
+
+A strategic merge recommendation is not the same as an actual merge.
+
+If a previous work order had a PR recommended for merge, verify whether the
+user actually merged it.
+
+Do not assume merge happened.
+
+If the previous required PR is not merged, stop and report:
+
+```text
+Blocked: previous PR has not been merged into main.
+```
+
+If continuing work on an unmerged PR, say so explicitly.
+
+For merge-state checks:
+
+```bash
+git checkout main
+git pull --ff-only
+git status --short
+gh pr view <PR_NUMBER> --json state,mergedAt,mergeCommit,url
+```
+
+If GitHub CLI is unavailable, use:
+
+```bash
+git log --oneline --decorate -n 10
+git branch --contains <COMMIT_SHA>
+```
+
+## Start-of-work report block
+
+Every future subagent report must include:
+
+```text
+Base branch:
+Base commit:
+Previous PR status:
+New branch:
+```
+
+Example:
+
+```text
+Base branch: main
+Base commit: abc1234
+Previous PR status: PR #2 merged at 2026-06-15T...
+New branch: feature/m2-png-preview
+```
+
 ## Benchmark reporting
 
 Benchmark claims require measurement.
