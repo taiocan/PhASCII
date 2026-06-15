@@ -34,7 +34,7 @@ Deliverables:
 - CLI saves `.txt` output in `output/`.
 - Golden text snapshot for one test image.
 
-Status: in progress.
+Status: complete.
 
 ## M2 — Rendered PNG preview
 
@@ -46,6 +46,8 @@ Deliverables:
 - CLI saves `.txt` and `.png` in `output/`.
 - unique file naming.
 - visual report template.
+
+Status: in progress.
 
 ## M3 — Quality comparison
 

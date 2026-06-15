@@ -7,10 +7,11 @@ edition = "2021"
 default = ["std", "jpg", "png-preview"]
 std = []
 jpg = ["dep:image"]
-png-preview = []
+png-preview = ["dep:image", "image/png", "dep:font8x8"]
 parallel = []
 android-jni = []
 wasm = []
 
 [dependencies]
 image = { version = "0.24.9", default-features = false, features = ["jpeg"], optional = true }
+font8x8 = { version = "0.3.1", optional = true }

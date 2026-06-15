@@ -91,6 +91,26 @@ Decision: Use the `image` crate with JPEG-only features for M1.
 
 Rationale: It keeps the first decode path small, portable, and easy to wire into the workspace.
 
+### D016 — PNG preview renderer dependency
+
+Decision: Use `font8x8` for deterministic bitmap glyphs and the `image` crate
+PNG encoder for preview output.
+
+Rationale: A tiny bitmap font keeps the renderer pure Rust and reproducible
+without system font discovery. Reusing the existing `image` crate keeps PNG
+encoding simple and portable.
+
+Dependency details:
+
+- dependency name: `font8x8`
+- purpose: built-in bitmap glyphs for ASCII preview rendering
+- license, if known: not checked in this work order
+- why it is needed: the preview must render text into stable PNG pixels
+- why simpler alternatives were not used: hand-writing a complete font table
+  would be larger and harder to maintain
+- Android-future compatibility risk, if any: low; it is pure Rust and does not
+  rely on system fonts
+
 ### O002 — PNG preview text rendering method
 
 Candidates:
@@ -99,7 +119,7 @@ Candidates:
 - image-only minimal renderer;
 - external font dependency.
 
-Decision needed during M2.
+Resolved by D016.
 
 ### O003 — Snapshot framework
 

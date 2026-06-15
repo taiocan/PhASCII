@@ -4,11 +4,13 @@ pub mod config;
 pub mod error;
 pub mod metrics;
 pub mod output;
+pub mod render;
 
 pub use config::{AsciiConfig, AsciiRamp, TransformMode};
 pub use error::PhasciiError;
 pub use metrics::TransformMetrics;
 pub use output::AsciiImage;
+pub use render::{render_ascii_to_png_bytes, RenderConfig};
 
 #[cfg(feature = "jpg")]
 mod transform;

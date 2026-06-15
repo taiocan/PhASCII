@@ -6,6 +6,7 @@ pub enum PhasciiError {
     InvalidConfig(String),
     Decode(String),
     Io(String),
+    Render(String),
     Unsupported(String),
 }
 
@@ -15,6 +16,7 @@ impl fmt::Display for PhasciiError {
             Self::InvalidConfig(message) => write!(f, "invalid config: {message}"),
             Self::Decode(message) => write!(f, "decode error: {message}"),
             Self::Io(message) => write!(f, "io error: {message}"),
+            Self::Render(message) => write!(f, "render error: {message}"),
             Self::Unsupported(message) => write!(f, "unsupported: {message}"),
         }
     }
