@@ -11,3 +11,14 @@ Run the CLI:
 ```bash
 cargo run -p phascii-cli -- path/to/input.jpg
 ```
+
+## Text hygiene
+
+Run this before review on Markdown or governance changes:
+
+```bash
+python3 scripts/check_text_hygiene.py
+```
+
+Before starting a new branch from a recommended PR, verify the exact PR head
+and merge state first.

@@ -4,6 +4,9 @@
 
 Goal: create the repo skeleton and compile empty crates.
 
+Before each milestone branch starts, verify that all prerequisite PRs are
+merged into `main`. Strategic recommendation does not equal merge.
+
 Deliverables:
 
 - Rust workspace.
