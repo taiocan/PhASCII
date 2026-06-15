@@ -85,6 +85,12 @@ Candidates:
 
 Decision needed after initial prototype.
 
+### D015 — JPG decode crate selection
+
+Decision: Use the `image` crate with JPEG-only features for M1.
+
+Rationale: It keeps the first decode path small, portable, and easy to wire into the workspace.
+
 ### O002 — PNG preview text rendering method
 
 Candidates:

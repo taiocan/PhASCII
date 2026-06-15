@@ -13,6 +13,8 @@ Deliverables:
 - Placeholder tests.
 - `cargo test` passes.
 
+Status: complete.
+
 ## M1 — Core text transform
 
 Goal: convert JPG input into deterministic ASCII text.
@@ -26,7 +28,10 @@ Deliverables:
 - Ramp mapping.
 - `AsciiImage` output struct.
 - CLI prints ASCII to stdout.
+- CLI saves `.txt` output in `output/`.
 - Golden text snapshot for one test image.
+
+Status: in progress.
 
 ## M2 — Rendered PNG preview
 
