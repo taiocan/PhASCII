@@ -257,6 +257,23 @@ When a work order touches code or workflow files, CI should verify formatting, w
 Prefer minimal, least-privilege workflows.
 Keep the workflow aligned with the current branch and PR expectations.
 
+## Text hygiene
+
+Governance files must remain reviewable as plain text.
+
+AGENTS.md must be ASCII-only, LF-only, free of bidi Unicode control
+characters, and free of collapsed long structural lines.
+
+Before requesting strategic review for Markdown or governance changes, run:
+
+```bash
+python3 scripts/check_text_hygiene.py
+git diff --check
+```
+
+When GitHub UI warnings conflict with byte-level checks, use the exact PR head
+SHA and raw GitHub payload as the source of truth.
+
 ## Benchmark reporting
 
 Benchmark claims require measurement.
