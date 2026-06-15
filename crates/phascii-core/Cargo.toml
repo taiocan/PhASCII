@@ -1,0 +1,16 @@
+[package]
+name = "phascii-core"
+version = "0.1.0"
+edition = "2021"
+
+[features]
+default = ["std", "jpg", "png-preview"]
+std = []
+jpg = ["dep:image"]
+png-preview = []
+parallel = []
+android-jni = []
+wasm = []
+
+[dependencies]
+image = { version = "0.24.9", default-features = false, features = ["jpeg"], optional = true }

@@ -1,0 +1,6 @@
+[workspace]
+members = [
+    "crates/phascii-core",
+    "crates/phascii-cli",
+]
+resolver = "2"
