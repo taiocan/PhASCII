@@ -87,17 +87,12 @@ impl From<&str> for AsciiRamp {
 }
 
 /// Placeholder transform mode enum for future work.
-#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Default)]
 pub enum TransformMode {
+    #[default]
     Stylized,
     Faithful,
     DitheredExperimental,
-}
-
-impl Default for TransformMode {
-    fn default() -> Self {
-        Self::Stylized
-    }
 }
 
 #[cfg(test)]
