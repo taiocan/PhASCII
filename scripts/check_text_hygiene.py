@@ -30,7 +30,15 @@ CHECKED_FILES = [
     "README.md",
     "QUALITY_RUBRIC.md",
     "BENCHMARK_PLAN.md",
+    ".github/workflows/ci.yml",
+    "scripts/check_text_hygiene.py",
 ]
+
+STRICT_FILES = {
+    "AGENTS.md",
+    ".github/workflows/ci.yml",
+    "scripts/check_text_hygiene.py",
+}
 
 
 @dataclass(frozen=True)
@@ -119,8 +127,8 @@ def scan_file(path: Path) -> list[Issue]:
         )
         return issues
 
-    limit = 180 if path.name == "AGENTS.md" else 220
-    is_agents = path.name == "AGENTS.md"
+    limit = 180 if path.name in STRICT_FILES else 220
+    is_strict = path.name in STRICT_FILES
 
     byte_offset = 0
     for line_no, line in enumerate(text.split("\n"), start=1):
@@ -134,11 +142,11 @@ def scan_file(path: Path) -> list[Issue]:
 
         for char_index, ch in enumerate(line):
             code_point = ord(ch)
-            if is_agents and code_point > 127:
+            if is_strict and code_point > 127:
                 add_issue(
                     issues,
                     path,
-                    "contains non-ASCII character; AGENTS.md must be ASCII-only",
+                    f"contains non-ASCII character; {path.name} must be ASCII-only",
                     line=line_no,
                     byte_offset=byte_offset + len(line[:char_index].encode("utf-8")),
                     code_point=f"U+{code_point:04X}",
