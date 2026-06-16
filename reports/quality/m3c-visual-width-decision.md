@@ -1,33 +1,36 @@
 # M3C Visual Width Decision
 
-date: 2026-06-16
-git commit: 5a9d91c6a25b0d9a540abf3e9e0e4aa1d57f7d2b
-branch: docs/m3c-record-width-decision
+Date: 2026-06-16
 
-input image set:
+Branch: docs/m3c-record-width-decision
+
+## Input image set
+
 - `031465694c839f3d8901e9b97dadec39.jpg`
 - `O_10152013114829459_1.jpeg`
 - `VanGogh_1887_Selbstbildnis.jpg`
 - `images.jpeg`
 - `Ženski_portret.jpg`
 
-widths compared: `100`, `120`, `160`
+## Widths compared
 
-local review index:
+- `100`
+- `120`
+- `160`
+
+## Local review index
+
 - `output/m3c-width-review/index.html`
 
-## User Decision Summary
+## User decision summary
 
-> Width 160 is the most recognizable compared with the original image, but it
-> reduces the visible ASCII-art character of the output.
->
-> Width 120 is less maximally recognizable, but preserves the ASCII-art feel
-> better.
->
-> Therefore, keep 120 as the default for now and document 160 as the
-> detail/recognizability width.
+Width `160` is the most recognizable compared with the original image, but it reduces the visible ASCII-art character of the output.
 
-## Decision Table
+Width `120` is less maximally recognizable, but preserves the ASCII-art feel better.
+
+Therefore, keep width `120` as the default for now and document width `160` as the detail / recognizability width.
+
+## Decision table
 
 | Image | User-selected width | Reason / note |
 |---|---:|---|
@@ -37,13 +40,14 @@ local review index:
 | `images.jpeg` | `160` | User selected 160 |
 | `Ženski_portret.jpg` | `pending` | User did not explicitly provide fifth selection |
 
-## Engineering Conclusion
+## Engineering conclusion
 
 - Keep width `120` as the default for now.
 - Treat width `160` as the detail / recognizability option.
 - Do not recommend width `100` as the main preview width.
 
-## Next Recommendation
+## Next recommendation
 
-Use width `160` only when the user wants maximum recognizability and accepts
-a less ASCII-like preview.
+Use width `160` only when the user wants maximum recognizability and accepts a less ASCII-like preview.
+
+Investigate low-contrast image quality next, without changing the default width yet.
