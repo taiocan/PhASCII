@@ -21,6 +21,12 @@ cargo run -p phascii-cli -- test-assets/input/2x2_bw.jpg --width 2
 The command prints ASCII text to stdout and saves matching `.txt` and `.png`
 files in `output/`.
 
+For local-only JPGs, you can run:
+
+```bash
+cargo run -p phascii-cli -- /home/axis/codex/local-input/example.jpg --width 120
+```
+
 ## Text hygiene
 
 Run this before review on Markdown or governance changes:
