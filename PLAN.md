@@ -56,6 +56,8 @@ M3A local preview generation is for evaluation only, not algorithm changes.
 M3B compares widths 100, 120, and 160 on the same local images without
 changing the transform algorithm.
 M3C visual width decision recorded; algorithm unchanged.
+M3C recorded the visual width decision: keep 120 as default for now; treat 160
+as a detail/recognizability option.
 
 Deliverables:
 
@@ -67,6 +69,9 @@ Deliverables:
 ## M4 — Benchmark baseline
 
 Goal: measure speed on Ubuntu WSL for one 1080p JPG.
+
+M3D should investigate quality improvements for weak/low-contrast images
+without losing ASCII character.
 
 Deliverables:
 

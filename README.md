@@ -30,6 +30,10 @@ cargo run -p phascii-cli -- /home/axis/codex/local-input/example.jpg --width 120
 Local preview comparison reports use the ignored `local-input/` and `output/`
 directories.
 
+Default width 120 is currently preferred because it balances recognizability
+with a visible ASCII-art feel. Width 160 can be used when recognizability and
+detail matter more than preserving the obvious ASCII texture.
+
 ## Text hygiene
 
 Run this before review on Markdown or governance changes:
