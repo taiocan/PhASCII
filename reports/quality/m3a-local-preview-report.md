@@ -18,7 +18,8 @@ detected file type: JPEG image data, JFIF standard 1.01, resolution (DPI), densi
 ASCII width used: 120
 generated .txt path: output/phascii_031465694c839f3d8901e9b97dadec39_1781583530585.txt
 generated .png path: output/phascii_031465694c839f3d8901e9b97dadec39_1781583530585.png
-Recognizability: strong
+PNG dimensions: 976x556
+Recognizability: pending user review
 Observations:
 - logo/text silhouette is visible
 - contrast appears strong
@@ -34,7 +35,8 @@ detected file type: JPEG image data, JFIF standard 1.02, aspect ratio, density
 ASCII width used: 120
 generated .txt path: output/phascii_O_10152013114829459_1_1781583530940.txt
 generated .png path: output/phascii_O_10152013114829459_1_1781583530940.png
-Recognizability: strong
+PNG dimensions: 976x736
+Recognizability: pending user review
 Observations:
 - spoon silhouette is clear
 - contrast appears strong
@@ -49,7 +51,8 @@ detected file type: JPEG image data, baseline, precision 8, 250x315, components 
 ASCII width used: 120
 generated .txt path: output/phascii_VanGogh_1887_Selbstbildnis_1781583531285.txt
 generated .png path: output/phascii_VanGogh_1887_Selbstbildnis_1781583531285.png
-Recognizability: strong
+PNG dimensions: 976x928
+Recognizability: pending user review
 Observations:
 - face silhouette is visible
 - contrast appears moderate
@@ -65,7 +68,8 @@ detected file type: JPEG image data, JFIF standard 1.01, aspect ratio, density
 ASCII width used: 120
 generated .txt path: output/phascii_images_1781583531583.txt
 generated .png path: output/phascii_images_1781583531583.png
-Recognizability: moderate to weak
+PNG dimensions: 976x736
+Recognizability: pending user review
 Observations:
 - tree/outdoor silhouette is visible
 - contrast appears weak
@@ -82,7 +86,8 @@ quality = 90", baseline, precision 8, 454x704, components 3
 ASCII width used: 120
 generated .txt path: output/phascii_Ženski_portret_1781583532168.txt
 generated .png path: output/phascii_Ženski_portret_1781583532168.png
-Recognizability: strong
+PNG dimensions: 976x1132
+Recognizability: pending user review
 Observations:
 - face silhouette is visible
 - contrast appears moderate
