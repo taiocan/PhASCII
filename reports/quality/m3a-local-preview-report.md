@@ -1,7 +1,7 @@
 # M3A Local Preview Report
 
 date: 2026-06-16
-git commit: a45fdec83804d20d4a6ce1f497ab0e8cad5db8ff
+git commit: 8bac9468d46d63f8ebd3b3400e8f1a54e0b312b2
 branch: docs/m3a-local-preview-report
 command template used:
   cargo run -p phascii-cli -- /home/axis/codex/local-input/<image>.jpg --width 120
