@@ -6,7 +6,7 @@ use std::{
     time::SystemTime,
 };
 
-use phascii_core::{jpg_bytes_to_ascii, AsciiConfig};
+use phascii_core::{jpg_bytes_to_ascii, render_ascii_to_png_bytes, AsciiConfig, RenderConfig};
 
 fn main() -> ExitCode {
     match run() {
@@ -66,12 +66,18 @@ fn run() -> Result<(), String> {
     let bytes = fs::read(&input_path)
         .map_err(|err| format!("failed to read {}: {err}", input_path.display()))?;
     let ascii = jpg_bytes_to_ascii(&bytes, &config).map_err(|err| err.to_string())?;
+    let preview = render_ascii_to_png_bytes(&ascii, &RenderConfig::default())
+        .map_err(|err| err.to_string())?;
 
     fs::create_dir_all("output").map_err(|err| format!("failed to create output/: {err}"))?;
     let timestamp = unix_millis();
-    let output_path = format!("output/phascii_{input_stem}_{timestamp}.txt");
+    let output_stem = format!("output/phascii_{input_stem}_{timestamp}");
+    let output_path = format!("{output_stem}.txt");
+    let preview_path = format!("{output_stem}.png");
     fs::write(&output_path, ascii.text.as_bytes())
         .map_err(|err| format!("failed to write {output_path}: {err}"))?;
+    fs::write(&preview_path, preview)
+        .map_err(|err| format!("failed to write {preview_path}: {err}"))?;
 
     let mut stdout = io::stdout().lock();
     stdout
@@ -81,7 +87,8 @@ fn run() -> Result<(), String> {
         .flush()
         .map_err(|err| format!("failed to flush stdout: {err}"))?;
 
-    eprintln!("wrote {output_path}");
+    eprintln!("Saved text: {output_path}");
+    eprintln!("Saved preview: {preview_path}");
     Ok(())
 }
 
