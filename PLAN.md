@@ -53,6 +53,8 @@ Status: in progress.
 
 Goal: compare baseline stylized output with experimental alternatives.
 M3A local preview generation is for evaluation only, not algorithm changes.
+M3B compares widths 100, 120, and 160 on the same local images without
+changing the transform algorithm.
 
 Deliverables:
 

@@ -27,6 +27,9 @@ For local-only JPGs, you can run:
 cargo run -p phascii-cli -- /home/axis/codex/local-input/example.jpg --width 120
 ```
 
+Local preview comparison reports use the ignored `local-input/` and `output/`
+directories.
+
 ## Text hygiene
 
 Run this before review on Markdown or governance changes:
