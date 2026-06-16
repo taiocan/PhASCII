@@ -1,7 +1,7 @@
 # M3B Width Comparison Report
 
 date: 2026-06-16
-git commit: a27b300c8efe3c007378a4894fb5e3f22e287b5c
+git commit: c32a389232f6e39f0d8b6793c7436cea88176728
 branch: docs/m3b-width-comparison
 input directory: /home/axis/codex/local-input
 image list:
