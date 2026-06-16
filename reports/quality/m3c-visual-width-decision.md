@@ -24,11 +24,13 @@ Branch: docs/m3c-record-width-decision
 
 ## User decision summary
 
-Width `160` is the most recognizable compared with the original image, but it reduces the visible ASCII-art character of the output.
+Width `160` is the most recognizable compared with the original image,
+but it reduces the visible ASCII-art character of the output.
 
 Width `120` is less maximally recognizable, but preserves the ASCII-art feel better.
 
-Therefore, keep width `120` as the default for now and document width `160` as the detail / recognizability width.
+Therefore, keep width `120` as the default for now and document width `160`
+as the detail / recognizability width.
 
 ## Decision table
 
@@ -48,6 +50,7 @@ Therefore, keep width `120` as the default for now and document width `160` as t
 
 ## Next recommendation
 
-Use width `160` only when the user wants maximum recognizability and accepts a less ASCII-like preview.
+Use width `160` only when the user wants maximum recognizability and accepts
+a less ASCII-like preview.
 
 Investigate low-contrast image quality next, without changing the default width yet.
