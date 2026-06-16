@@ -52,6 +52,7 @@ Status: in progress.
 ## M3 — Quality comparison
 
 Goal: compare baseline stylized output with experimental alternatives.
+M3A local preview generation is for evaluation only, not algorithm changes.
 
 Deliverables:
 
