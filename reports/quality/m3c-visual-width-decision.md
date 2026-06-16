@@ -1,7 +1,7 @@
 # M3C Visual Width Decision
 
 date: 2026-06-16
-git commit: TBD
+git commit: 5a9d91c6a25b0d9a540abf3e9e0e4aa1d57f7d2b
 branch: docs/m3c-record-width-decision
 input image set:
 - 031465694c839f3d8901e9b97dadec39.jpg
