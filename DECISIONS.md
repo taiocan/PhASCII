@@ -111,6 +111,25 @@ Dependency details:
 - Android-future compatibility risk, if any: low; it is pure Rust and does not
   rely on system fonts
 
+### D017 — Experimental tone controls
+
+Decision: Add optional contrast and gamma controls for quality testing, but
+keep the default output unchanged.
+
+Rationale: Low-contrast images may benefit from small tone adjustments during
+evaluation, while the default path must remain stable for users and tests.
+
+Dependency details:
+
+- dependency name: none
+- purpose: optional tone adjustment in the existing ASCII transform pipeline
+- license, if known: not applicable
+- why it is needed: evaluate whether weak images become more recognizable
+- why simpler alternatives were not used: the existing pipeline needs a small,
+  explicit tone hook rather than a separate mode
+- Android-future compatibility risk, if any: low; the change is pure Rust and
+  keeps the default path unchanged
+
 ### O002 — PNG preview text rendering method
 
 Candidates:

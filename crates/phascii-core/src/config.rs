@@ -7,7 +7,15 @@ pub struct AsciiConfig {
     pub aspect_correction: f32,
     pub invert: bool,
     pub normalize: bool,
+    pub tone: ToneConfig,
     pub ramp: AsciiRamp,
+}
+
+/// Optional tone controls applied before ramp mapping.
+#[derive(Debug, Clone, Copy, PartialEq)]
+pub struct ToneConfig {
+    pub contrast: f32,
+    pub gamma: f32,
 }
 
 impl Default for AsciiConfig {
@@ -17,7 +25,17 @@ impl Default for AsciiConfig {
             aspect_correction: 0.5,
             invert: false,
             normalize: true,
+            tone: ToneConfig::default(),
             ramp: AsciiRamp::default(),
+        }
+    }
+}
+
+impl Default for ToneConfig {
+    fn default() -> Self {
+        Self {
+            contrast: 1.0,
+            gamma: 1.0,
         }
     }
 }
@@ -46,6 +64,39 @@ impl AsciiConfig {
         if self.ramp.len_chars() < 2 {
             return Err(PhasciiError::InvalidConfig(
                 "ramp must contain at least 2 characters".to_string(),
+            ));
+        }
+
+        self.tone.validate()?;
+
+        Ok(())
+    }
+}
+
+impl ToneConfig {
+    /// Validate the optional tone controls.
+    pub fn validate(&self) -> Result<(), PhasciiError> {
+        if !self.contrast.is_finite() {
+            return Err(PhasciiError::InvalidConfig(
+                "contrast must be finite".to_string(),
+            ));
+        }
+
+        if !(0.1..=5.0).contains(&self.contrast) {
+            return Err(PhasciiError::InvalidConfig(
+                "contrast must be between 0.1 and 5.0".to_string(),
+            ));
+        }
+
+        if !self.gamma.is_finite() {
+            return Err(PhasciiError::InvalidConfig(
+                "gamma must be finite".to_string(),
+            ));
+        }
+
+        if !(0.2..=5.0).contains(&self.gamma) {
+            return Err(PhasciiError::InvalidConfig(
+                "gamma must be between 0.2 and 5.0".to_string(),
             ));
         }
 
@@ -115,6 +166,13 @@ mod tests {
     }
 
     #[test]
+    fn tone_config_defaults_match_spec() {
+        let tone = ToneConfig::default();
+        assert_eq!(tone.contrast, 1.0);
+        assert_eq!(tone.gamma, 1.0);
+    }
+
+    #[test]
     fn width_zero_fails_validation() {
         let mut config = AsciiConfig::default();
         config.width = 0;
@@ -151,6 +209,41 @@ mod tests {
         let err = config
             .validate()
             .expect_err("single-character ramp must be invalid");
+        assert!(matches!(err, PhasciiError::InvalidConfig(_)));
+    }
+
+    #[test]
+    fn invalid_contrast_fails_validation() {
+        let mut tone = ToneConfig::default();
+        tone.contrast = 0.05;
+
+        let err = tone
+            .validate()
+            .expect_err("contrast below minimum must be invalid");
+        assert!(matches!(err, PhasciiError::InvalidConfig(_)));
+    }
+
+    #[test]
+    fn invalid_gamma_fails_validation() {
+        let mut tone = ToneConfig::default();
+        tone.gamma = 0.1;
+
+        let err = tone
+            .validate()
+            .expect_err("gamma below minimum must be invalid");
+        assert!(matches!(err, PhasciiError::InvalidConfig(_)));
+    }
+
+    #[test]
+    fn non_finite_tone_values_fail_validation() {
+        let tone = ToneConfig {
+            contrast: f32::NAN,
+            gamma: f32::INFINITY,
+        };
+
+        let err = tone
+            .validate()
+            .expect_err("non-finite tone values must be invalid");
         assert!(matches!(err, PhasciiError::InvalidConfig(_)));
     }
 }

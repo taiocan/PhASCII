@@ -22,6 +22,8 @@ fn run() -> Result<(), String> {
     let mut args = env::args().skip(1);
     let mut input_path: Option<PathBuf> = None;
     let mut width_override: Option<u32> = None;
+    let mut contrast_override: Option<f32> = None;
+    let mut gamma_override: Option<f32> = None;
 
     while let Some(arg) = args.next() {
         match arg.as_str() {
@@ -39,6 +41,18 @@ fn run() -> Result<(), String> {
                         .map_err(|_| "--width must be a positive integer".to_string())?,
                 );
             }
+            "--contrast" => {
+                let value = args
+                    .next()
+                    .ok_or_else(|| "--contrast requires a value".to_string())?;
+                contrast_override = Some(parse_f32_flag("--contrast", &value)?);
+            }
+            "--gamma" => {
+                let value = args
+                    .next()
+                    .ok_or_else(|| "--gamma requires a value".to_string())?;
+                gamma_override = Some(parse_f32_flag("--gamma", &value)?);
+            }
             value if value.starts_with('-') => {
                 return Err(format!("unrecognized argument: {value}"));
             }
@@ -51,8 +65,9 @@ fn run() -> Result<(), String> {
         }
     }
 
-    let input_path =
-        input_path.ok_or_else(|| "usage: phascii-cli <input.jpg> [--width N]".to_string())?;
+    let input_path = input_path.ok_or_else(|| {
+        "usage: phascii-cli <input.jpg> [--width N] [--contrast V] [--gamma V]".to_string()
+    })?;
     let input_stem = input_path
         .file_stem()
         .and_then(|stem| stem.to_str())
@@ -61,6 +76,12 @@ fn run() -> Result<(), String> {
     let mut config = AsciiConfig::default();
     if let Some(width) = width_override {
         config.width = width;
+    }
+    if let Some(contrast) = contrast_override {
+        config.tone.contrast = contrast;
+    }
+    if let Some(gamma) = gamma_override {
+        config.tone.gamma = gamma;
     }
 
     let bytes = fs::read(&input_path)
@@ -93,7 +114,19 @@ fn run() -> Result<(), String> {
 }
 
 fn print_usage() {
-    println!("Usage: phascii-cli <input.jpg> [--width N]");
+    println!("Usage: phascii-cli <input.jpg> [--width N] [--contrast V] [--gamma V]");
+}
+
+fn parse_f32_flag(flag: &str, value: &str) -> Result<f32, String> {
+    let parsed = value
+        .parse::<f32>()
+        .map_err(|_| format!("{flag} must be a finite decimal number"))?;
+
+    if !parsed.is_finite() {
+        return Err(format!("{flag} must be finite"));
+    }
+
+    Ok(parsed)
 }
 
 fn unix_millis() -> u128 {
