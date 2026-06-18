@@ -1,6 +1,6 @@
 # M3D Tone Controls Report
 
-Date: 2026-06-17
+Date: 2026-06-18
 Git commit: b3e2d0feea3421e5684b1c24213778405c561381
 Branch: feature/m3d-tone-controls
 
@@ -22,11 +22,13 @@ Branch: feature/m3d-tone-controls
 
 ## Commands Used
 
-- `cargo run -p phascii-cli -- /home/axis/codex/local-input/<image> --width 120`
-- `cargo run -p phascii-cli -- /home/axis/codex/local-input/<image> --width 120 --contrast 1.25`
-- `cargo run -p phascii-cli -- /home/axis/codex/local-input/<image> --width 120 --contrast 1.5`
-- `cargo run -p phascii-cli -- /home/axis/codex/local-input/<image> --width 120 --contrast 1.25 --gamma 0.85`
-- `cargo run -p phascii-cli -- /home/axis/codex/local-input/<image> --width 120 --contrast 1.25 --gamma 1.15`
+- `cargo run -p phascii-cli -- /home/axis/codex/local-input/images.jpeg --width 120`
+- `cargo run -p phascii-cli -- /home/axis/codex/local-input/images.jpeg --width 120 --contrast 1.25`
+- `cargo run -p phascii-cli -- /home/axis/codex/local-input/images.jpeg --width 120 --contrast 1.5`
+- `cargo run -p phascii-cli -- /home/axis/codex/local-input/images.jpeg --width 120 --contrast 1.25 --gamma 0.85`
+- `cargo run -p phascii-cli -- /home/axis/codex/local-input/images.jpeg --width 120 --contrast 1.25 --gamma 1.15`
+
+The same command pattern was repeated for the other local images listed below.
 
 ## Generated Output Directory
 
