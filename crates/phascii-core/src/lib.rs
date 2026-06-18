@@ -6,7 +6,7 @@ pub mod metrics;
 pub mod output;
 pub mod render;
 
-pub use config::{AsciiConfig, AsciiRamp, TransformMode};
+pub use config::{AsciiConfig, AsciiRamp, ToneConfig, TransformMode};
 pub use error::PhasciiError;
 pub use metrics::TransformMetrics;
 pub use output::AsciiImage;
@@ -57,5 +57,18 @@ mod tests {
 
         let err = jpg_bytes_to_ascii(&[], &config).expect_err("empty bytes must fail");
         assert!(matches!(err, PhasciiError::Decode(_)));
+    }
+
+    #[test]
+    fn default_tone_preserves_existing_fixture_output() {
+        let bytes = include_bytes!("../../../test-assets/input/2x2_bw.jpg");
+        let config = AsciiConfig {
+            width: 2,
+            ..AsciiConfig::default()
+        };
+        let ascii =
+            jpg_bytes_to_ascii(bytes, &config).expect("fixture should decode with defaults");
+
+        assert_eq!(ascii.text, "++\n");
     }
 }
