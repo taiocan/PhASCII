@@ -40,6 +40,8 @@ STRICT_FILES = {
     "scripts/check_text_hygiene.py",
 }
 
+REPORT_DIR = Path("reports/quality")
+
 
 @dataclass(frozen=True)
 class Issue:
@@ -166,6 +168,12 @@ def scan_file(path: Path) -> list[Issue]:
     return issues
 
 
+def report_paths() -> list[Path]:
+    if not REPORT_DIR.exists():
+        return []
+    return sorted(path for path in REPORT_DIR.glob("*.md") if path.is_file())
+
+
 def main() -> int:
     issues: list[Issue] = []
 
@@ -174,6 +182,9 @@ def main() -> int:
         if not path.exists():
             print(f"warning: skipping missing file {path}", file=sys.stderr)
             continue
+        issues.extend(scan_file(path))
+
+    for path in report_paths():
         issues.extend(scan_file(path))
 
     for issue in issues:
