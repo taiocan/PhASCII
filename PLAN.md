@@ -56,6 +56,8 @@ M3A local preview generation is for evaluation only, not algorithm changes.
 M3B compares widths 100, 120, and 160 on the same local images without
 changing the transform algorithm.
 M3C visual width decision recorded; algorithm unchanged.
+M3D experimental tone controls are added for quality testing; default output
+remains unchanged.
 
 Deliverables:
 
@@ -63,6 +65,7 @@ Deliverables:
 - `dithered-experimental` mode.
 - rendered comparison outputs.
 - manual score report.
+- optional tone controls for low-contrast image testing.
 
 ## M4 — Benchmark baseline
 

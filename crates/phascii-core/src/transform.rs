@@ -1,4 +1,4 @@
-use crate::{AsciiConfig, AsciiImage, PhasciiError};
+use crate::{AsciiConfig, AsciiImage, PhasciiError, ToneConfig};
 
 pub(super) fn jpg_bytes_to_ascii(
     bytes: &[u8],
@@ -39,6 +39,7 @@ pub(super) fn jpg_bytes_to_ascii(
     } else {
         values
     };
+    let values = apply_tone_values(&values, config.tone);
 
     let ramp_chars: Vec<char> = config.ramp.as_str().chars().collect();
     let mut text =
@@ -133,6 +134,18 @@ fn normalize_values(values: &[u8]) -> Vec<u8> {
         .collect()
 }
 
+fn apply_tone_values(values: &[u8], tone: ToneConfig) -> Vec<u8> {
+    values
+        .iter()
+        .map(|&value| (tone_unit_value(value as f32 / 255.0, tone) * 255.0).round() as u8)
+        .collect()
+}
+
+fn tone_unit_value(value: f32, tone: ToneConfig) -> f32 {
+    let contrast = ((value - 0.5) * tone.contrast + 0.5).clamp(0.0, 1.0);
+    contrast.powf(tone.gamma).clamp(0.0, 1.0)
+}
+
 fn ramp_char(ramp: &[char], brightness: u8, invert: bool) -> char {
     if ramp.is_empty() {
         return ' ';
@@ -186,6 +199,7 @@ mod tests {
             aspect_correction: 1.0,
             invert: false,
             normalize: false,
+            tone: ToneConfig::default(),
             ramp: AsciiRamp::default(),
         };
 
@@ -196,5 +210,21 @@ mod tests {
         let lines: Vec<&str> = ascii.text.lines().collect();
         assert_eq!(lines.len(), 2);
         assert!(lines.iter().all(|line| line.chars().count() == 2));
+    }
+
+    #[test]
+    fn tone_mapping_clamps_to_valid_range() {
+        let tone = ToneConfig {
+            contrast: 5.0,
+            gamma: 0.2,
+        };
+
+        let dark = tone_unit_value(0.0, tone);
+        let mid = tone_unit_value(0.5, tone);
+        let light = tone_unit_value(1.0, tone);
+
+        assert!((0.0..=1.0).contains(&dark));
+        assert!((0.0..=1.0).contains(&mid));
+        assert!((0.0..=1.0).contains(&light));
     }
 }

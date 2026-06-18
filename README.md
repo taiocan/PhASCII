@@ -6,6 +6,10 @@ M2 supports JPG-to-ASCII text plus rendered PNG preview.
 The 2x2 sample fixture validates the pipeline, but it does not demonstrate
 visual recognizability.
 
+Default width 120 is currently preferred because it balances recognizability
+with a visible ASCII-art feel. Width 160 can be used when
+recognizability/detail matters more than preserving the obvious ASCII texture.
+
 Run the CLI:
 
 ```bash
@@ -29,6 +33,8 @@ cargo run -p phascii-cli -- /home/axis/codex/local-input/example.jpg --width 120
 
 Local preview comparison reports use the ignored `local-input/` and `output/`
 directories.
+
+Tone controls are optional. Default output remains unchanged.
 
 ## Text hygiene
 
